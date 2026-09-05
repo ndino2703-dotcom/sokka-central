@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sokka Central</title>
+</head>
+<body>
+    <h1>Sokka Central</h1>
+    <p>Buy and sell soccer gear.</p>
+
+    <h2>List an item for sale</h2>
+    <label>Item name:</label>
+    <input type="text" id="itemName">
+    <br><br>
+
+    <label>Price (N$):</label>
+    <input type="number" id="itemPrice">
+    <br><br>
+
+    <label>Description:</label>
+    <input type="text" id="itemDesc">
+    <br><br>
+
+    <button onclick="addItem()">List Item</button>
+
+    <h2>Items for Sale</h2>
+      <div id="listingArea"></div>
+
+      <script>
+        let items = [];
+        
+        function addItem() {
+            let name = document.getElementById('itemName').value;
+            let price = document.getElementById('itemPrice').value;
+            let desc = document.getElementById('itemDesc').value;
+            if (name === "" || price === "" || desc === "") {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            if (price <=0) {
+                alert("Price must be greater than zero.");
+                return;
+            }
+
+
+            items.push({ name: name, price: price, desc: desc });
+
+            document.getElementById('itemName').value = "";
+            document.getElementById('itemPrice').value = "";
+            document.getElementById('itemDesc').value = "";
+
+            showItems() ;
+        }
+
+        function showItems() {
+            let output = "";
+            for (let i = 0; i < items.length; i++) {
+                output = output + "<p><b>" + items[i].name + "</b> - N$" + items[i].price + "<br>" + items[i].desc + "</p>";
+            }
+            document.getElementById('listingArea').innerHTML = output;
+        }
+        </script>     
+
+
+    
+
